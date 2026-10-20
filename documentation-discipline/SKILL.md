@@ -1,6 +1,6 @@
 ---
 name: documentation-discipline
-description: Keep repository documentation current and separate human-readable designs, behavior, and open design questions from agent progress and handoff context. Use when changing a repository, maintaining its docs, or scrubbing accumulated implementation diaries and stale status notes.
+description: Keep repository documentation current and separate human-readable designs, behavior, and open design questions from agent progress and handoff context. Use when a task changes documented behavior, interfaces, workflows, or design, when maintaining documentation, or when scrubbing accumulated implementation diaries and stale status notes.
 ---
 
 # Documentation discipline
@@ -12,7 +12,7 @@ Maintain documentation as an edited description of the project. Organize by subj
 - `README.md` and `docs/` serve human readers: orientation, current behavior, interfaces, usage, architecture, design rationale, and substantive open design problems. Component READMEs follow the same convention.
 - `agents/` holds agent work context: active plans, progress, implementation diaries, handoffs, pending validation, operational state, and evidence pointers needed to resume work. Organize by ongoing goal; avoid one new file per session.
 - Keep root `AGENTS.md` a concise instruction and navigation entry point. Put evolving handoff state under `agents/` and link to it.
-- When adopting this convention in a repository, require a Markdown link in its `AGENTS.md` to this skill's actual `SKILL.md`, plus a short statement of the `docs/` / README versus `agents/` split and the obligation to inspect affected documentation on every change. Resolve the real installed or repository-local path; do not leave a placeholder or an unresolvable skill name. Prefer a repository-relative link if the skill is tracked there. Do not copy the entire skill into repository instructions.
+- When adopting this convention in a repository, require a Markdown link in its `AGENTS.md` to this skill's actual `SKILL.md`, plus a short statement of the `docs/` / README versus `agents/` split and the obligation to inspect affected documentation when a task changes what those documents need to describe. Resolve the real installed or repository-local path; do not leave a placeholder or an unresolvable skill name. Prefer a repository-relative link if the skill is tracked there. Do not copy the entire skill into repository instructions.
 - Link an `agents/` index from `AGENTS.md` when multiple active contexts need navigation. Create only directories and files with useful content. Human documentation must remain understandable without reading agent diaries.
 
 This skill supplies maintenance rules, not permission for a wholesale repository rewrite. Apply routine maintenance to the current change; run the broader scrub workflow when requested. Creating this skill alone does not require scrubbing the current repository.
@@ -59,9 +59,23 @@ research progress report.
   Do not append qualifications explaining their history; preserve historical
   rationale separately only when it still serves a concrete reader need.
 
-## On every repository change
+## When a task calls for documentation maintenance
 
-1. Inspect the README, documentation navigation, and human topic pages affected by the change. Follow relevant links and search for the changed behavior, interface, configuration, or design term. Do this even when the task did not explicitly request documentation edits. Keep inspection proportional to the affected scope.
+Trigger a documentation review when the task changes something readers need to
+know: observable behavior, supported interfaces, configuration, installation or
+operating procedures, architecture, design decisions, or substantive open design
+questions. Also trigger it when the task reveals an inaccurate documented claim
+or explicitly requests documentation maintenance. The user need not separately
+ask for docs when the task has these effects.
+
+Do not require a documentation review for every small fix. Internal refactoring,
+formatting, test-only changes, or a localized correction that restores the
+already documented behavior need no review unless they also affect a documented
+contract or expose stale guidance. Judge the semantic impact, not patch size.
+This is a brief scope decision, not a mandatory search of all documentation or
+a checklist to record for each task.
+
+1. For a triggered review, inspect the affected human topic pages and relevant README/navigation entries. Follow relevant links and search for the changed behavior, interface, configuration, or design term. Keep inspection proportional to the affected scope; unrelated documentation need not be read.
 2. Compare those descriptions with the changed source, interfaces, and accepted design intent. Reconcile contradictions and update the canonical explanation in place. Remove obsolete instructions and redundant status paragraphs; do not append a dated correction beneath stale text.
 3. Update related examples and navigation where needed. If the existing docs remain accurate, leave them unchanged after inspection; do not add a “docs reviewed” entry to human documentation.
 4. Refresh agent context only where continuation requires it. Record actionable remaining work, blockers, exact evidence references, and relevant validation results. Remove resolved tasks and replace obsolete state instead of accumulating contradictory handoffs.
@@ -129,11 +143,29 @@ multiple source files into one approval or migrate later files in advance.
    content from several source files receives incremental, separately approved
    migration commits. Push only according to the user's authorization and
    repository policy; per-file commits do not imply per-file pushes.
-7. **Finish the scrub.** Check human and agent navigation across the migrated
-   files. Ensure `AGENTS.md` links to this skill and states the directory
-   convention; include any needed instruction changes in a per-file proposal
-   before editing them. A human should understand the system without a campaign
-   history; a successor agent should find active constraints and next actions
-   without retired diaries. Present any additional corrective edits for approval
-   through the same file-by-file loop. Summarize completed migrations and
-   unresolved decisions in the final response.
+7. **Perform a final cross-document review.** After all file migrations, read
+   the resulting human documentation and active agent context as a connected
+   whole, including affected entry points and destination pages. Check:
+   - **Links and navigation:** update indexes, inbound links, cross-references,
+     and section anchors; remove dead or obsolete destinations. Ensure
+     `AGENTS.md` links to this skill and states the directory convention and
+     impact-based review trigger.
+   - **Overlap:** identify duplicate explanations, competing canonical pages,
+     and repeated handoff state. Give each subject a clear authoritative home
+     and use links where other pages need that explanation.
+   - **Conflicts:** reconcile contradictory behavior, interface definitions,
+     terminology, design status, and next actions against current source and
+     accepted decisions. Preserve specific unresolved questions explicitly
+     instead of silently choosing an unsupported interpretation.
+   - **Coherence and completeness:** verify that moved material still supplies
+     the context its readers need, prerequisites connect to procedures, design
+     explanations agree with usage, and agent state agrees with human docs.
+     Check for lost rationale or evidence pointers and stale historical state
+     presented as current. A human should understand the system without a
+     campaign history; a successor agent should find constraints and next actions
+     without retired diaries.
+   Present corrections through the same per-file proposal, approval, validation,
+   and commit loop; the final review does not authorize unreviewed cleanup.
+   Recheck affected links and cross-document relationships after corrections.
+   Close only after this integration pass, summarizing migrations, final checks,
+   and any concrete unresolved decisions in the response.

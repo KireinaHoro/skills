@@ -2,7 +2,9 @@
 
 Follow [documentation-discipline](documentation-discipline/SKILL.md): README and
 `docs/` are for human readers; `agents/` is for active agent context and progress.
-Inspect affected human documentation on every change and update it in place.
+Inspect affected human documentation when a task changes documented behavior,
+interfaces, workflows, or design, and update it in place. Small fixes that preserve
+the documented contract do not require a documentation review.
 
 Keep these skills project independent. Put project-specific contracts in the
 consuming repository, and keep skill instructions consistent with their discovery
