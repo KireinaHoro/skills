@@ -37,10 +37,71 @@ A reproducible evaluation, benchmark methodology, or design decision record can 
 
 ## Scrub an existing repository
 
-1. **Inventory and classify.** Read repository instructions and documentation entry points, then inspect topic pages and existing handoffs. Identify canonical human topics, mixed narrative, duplicate claims, obsolete material, and active agent state. Keep any migration checklist in `agents/` or temporary working output.
-2. **Establish current meaning.** Reconcile conflicting text with relevant source and authoritative design decisions. Historical success does not establish current behavior. Preserve unresolved factual questions in active agent context; ask about unresolved intent only when it affects the rewrite.
-3. **Extract human documentation.** Rewrite each canonical topic as a coherent account of current behavior, design, usage, or an open design problem. Consolidate overlapping pages. Retain substantive rationale and research qualifications. Replace chronological additions and progress summaries with integrated explanations.
-4. **Extract active handoff state.** Under `agents/`, consolidate each ongoing goal into a compact account of the objective, current state, decisions and constraints, next actions, blockers, and evidence locations needed to continue. Preserve operational hazards such as frozen failure captures or restrictions on resets. Treat dated reservations and machine state as historical observations requiring recheck.
-5. **Retire superseded text.** Remove resolved checklists, stale handoffs, duplicate narratives, and obsolete instructions from the active tree. Use Git history as the default historical record. If an old account has concrete reference value beyond Git history, summarize it and file it under `agents/archive/` with its historical scope and a pointer to the replacement. Preserve irreplaceable evidence before deletion, especially untracked material. Do not manufacture an archive of everything removed.
-6. **Repair navigation and adopt the convention.** Update human indexes and inbound links to canonical topics; update agent navigation to active contexts. Add or correct the required `AGENTS.md` link to this skill and its concise directory convention. Remove dead links and links that present retired text as current guidance.
-7. **Review the result as both readers.** A human should find the system explanation without reconstructing a campaign history. A successor agent should find the active objective, constraints, and next action without reading retired diaries. Check moved material for lost design rationale, unsupported guarantees, or discarded recovery context. Summarize what was consolidated or retired and any unresolved decisions in the task response.
+A scrub is an interactive, file-by-file review. Approval to start the scrub is
+not approval to migrate every file. Stop for explicit user approval at the
+per-file review below; silence or elapsed time is not approval. Do not batch
+multiple source files into one approval or migrate later files in advance.
+
+1. **Prepare the review queue.** Read repository instructions and documentation
+   entry points, inspect Git status, and identify the documentation files in
+   scope. Keep the queue in `agents/` or temporary output. Preserve unrelated
+   edits. Inventorying files does not authorize rewriting them.
+2. **Read one file and establish its meaning.** Inspect the complete document,
+   relevant source, linked design decisions, and potential destination pages.
+   Reconcile conflicting claims; historical success does not establish current
+   behavior. Identify unresolved factual questions and intent that affects the
+   proposed rewrite.
+3. **Present the document and proposal, then STOP.** Identify and link the source
+   file. Present its current contents for review; for a long document, provide a
+   section-by-section account with relevant excerpts and a link to the complete
+   text. Do not hide proposed deletions behind a vague summary. Before any
+   migration edits, summarize what belongs in each category, explicitly marking
+   empty categories:
+   - **Human documentation:** current behavior, interfaces, usage, architecture,
+     design rationale, substantive open design problems, and research methodology
+     or qualifications. Name the destination paths and proposed restructuring.
+   - **Active agent context:** objectives, decisions and constraints, next actions,
+     blockers, pending validation, evidence pointers, and operational recovery
+     state. Name the destination paths under `agents/`.
+   - **Reference-only history:** material with concrete ongoing reference value;
+     explain why a summary under `agents/archive/` is needed instead of Git history
+     and identify its historical scope and replacement.
+   - **Retire:** superseded, duplicate, or resolved text to remove, with reasons.
+     Preserve irreplaceable evidence, especially untracked material.
+   Include material remaining unchanged, unresolved questions, and all related
+   destination/navigation files that the migration would modify. Ask the user to
+   approve or revise this specific proposal and end the turn. Explain that this
+   skill requires per-file approval and link to this workflow. Do not edit or
+   commit the migration while approval is pending.
+4. **Apply the approved migration.** Incorporate the user's corrections. Rewrite
+   human explanations in place; preserve substantive rationale, research
+   qualifications, and explicit proposal status. Consolidate active handoff state
+   by goal, preserving hazards such as frozen captures and reset restrictions.
+   Treat dated reservations and machine state as observations requiring recheck.
+   Use Git history for retired material by default; do not archive everything.
+   If new evidence materially changes the approved destinations, deletions, or
+   meaning, present the revised proposal and stop for approval again.
+5. **Validate and commit this file's migration.** Inspect the diff for lost
+   meaning, unsupported guarantees, stale claims, and leaked progress prose.
+   Repair inbound links and navigation affected by this migration and verify
+   local links. Commit the source file together with its destination excerpts
+   and necessary navigation updates as one coherent migration. Stage only the
+   approved changes; never include unrelated edits. Do not defer commits until
+   the end of the scrub or combine independently reviewed source files. If the
+   approved action leaves the file unchanged, report that outcome without an
+   empty commit. If validation or committing fails, resolve or report the issue
+   before starting the next migration.
+6. **Report and advance.** Report the commit and validation results, then present
+   the next file using steps 2–3 and stop again. Keep active queue state compact;
+   do not turn human documentation into a review diary. A destination receiving
+   content from several source files receives incremental, separately approved
+   migration commits. Push only according to the user's authorization and
+   repository policy; per-file commits do not imply per-file pushes.
+7. **Finish the scrub.** Check human and agent navigation across the migrated
+   files. Ensure `AGENTS.md` links to this skill and states the directory
+   convention; include any needed instruction changes in a per-file proposal
+   before editing them. A human should understand the system without a campaign
+   history; a successor agent should find active constraints and next actions
+   without retired diaries. Present any additional corrective edits for approval
+   through the same file-by-file loop. Summarize completed migrations and
+   unresolved decisions in the final response.
