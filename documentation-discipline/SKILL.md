@@ -21,11 +21,43 @@ This skill supplies maintenance rules, not permission for a wholesale repository
 
 Write human documentation in terms of the system: what it does, why it works that way, how to use it, and what design choices remain unresolved. Describe an open design problem with its constraints, alternatives, tradeoffs, and decision criteria. Clearly identify proposals as proposals.
 
-Keep session chronology, completed-task lists, next-agent instructions, pipeline IDs, transient reservations, paused experiments, and “X done; Y remains unverified” prose in `agents/`. Translate implementation activity into the resulting behavior when that behavior matters to readers. Do not merely move an entire mixed document: extract and integrate the durable explanation into the appropriate human topic.
+Keep session chronology, completed-task lists, next-agent instructions, pipeline IDs, transient reservations, paused experiments, and concrete validation tasks in `agents/`. Rewrite generic completion/verification hedging into specific state and next actions rather than relocating it verbatim. Translate implementation activity into the resulting behavior when that behavior matters to readers. Do not merely move an entire mixed document: extract and integrate the durable explanation into the appropriate human topic.
 
 Removing hedging must not turn an untested claim into a guarantee. State meaningful product constraints directly, such as “Automatic recovery is unsupported,” and keep test execution status in agent context. If behavior cannot be established, narrow or omit the claim and record the verification task under `agents/`. Preserve uncertainty that is itself part of a scientific result or unresolved design problem.
 
 A reproducible evaluation, benchmark methodology, or design decision record can be useful human documentation. Preserve the assumptions, evidence, limitations, and reasoning readers need, while removing the surrounding execution diary. Keep datasets and reproduction scripts in their established supported locations; this convention does not relocate them or discard provenance.
+
+## Technical writing and epistemic precision
+
+Apply these requirements to both human documentation and agent context.
+Human documentation describes the current system authoritatively. Agent context
+records concrete working state and continuation actions. Neither should read as
+an audit of the agent's confidence; human documentation must not become a
+research progress report.
+
+- State established facts directly and concisely. Do not attach generic caveats,
+  disclaimers, or verification-status qualifiers to paragraphs.
+- Distinguish design intent, implemented behavior, and experimentally established
+  behavior where the distinction matters. Describe proposals as proposals,
+  source-supported behavior as implementation, and measured results within the
+  actual experiment's scope. Never imply a test ran or a claim was proven without
+  evidence; authoritative wording does not justify stronger claims.
+- Express uncertainty only when it is specific, material, and actionable. Name
+  the unresolved question, its consequence, and the decision or evidence needed
+  to resolve it. Avoid boilerplate such as “remains unverified,” “not yet
+  validated,” “further testing is needed,” or “subject to verification.”
+- Collect genuine unresolved questions in a dedicated section instead of
+  repeating them throughout a document. Keep substantive design questions in
+  the relevant human topic; keep pending checks and operational blockers in
+  agent context. Create no empty uncertainty section. Retain specific assumptions
+  or experimental limitations beside claims when needed to interpret them.
+- In agent context, state actual results and exact next checks with evidence
+  pointers. For example, replace “Recovery remains unverified” with an actionable
+  entry: “Open check: interrupt a write during restart and check that replay
+  preserves acknowledged writes.” Do not imply that the proposed check has run.
+- Rewrite outdated statements to describe the current system or working state.
+  Do not append qualifications explaining their history; preserve historical
+  rationale separately only when it still serves a concrete reader need.
 
 ## On every repository change
 
