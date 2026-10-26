@@ -7,6 +7,33 @@ description: Keep repository documentation current and separate human-readable d
 
 Maintain documentation as an edited description of the project. Organize by subject and reader need; never treat human documentation as a chronological, append-only work log.
 
+## Revise existing pages first
+
+Strongly prefer updating the existing canonical page over creating another page.
+Search the relevant documentation and navigation before choosing a destination.
+Integrate new decisions, evidence and explanations into the sections where they
+belong, rewriting the surrounding text and updating affected examples, tables,
+links and related pages consistently. Read the result as one coherent document.
+Do not merely append an update, correction, addendum or second account while
+leaving an earlier explanation stale, contradictory or duplicated. When merging
+pages, reorganize by subject and reader need rather than concatenating them;
+preserve useful evidence and remove superseded text.
+
+**Creating a new documentation page requires explicit user approval.** This
+includes new human documentation, agent-context pages and splitting an existing
+page into additional files. Before creating one, identify the existing pages
+considered, explain why updating them is insufficient, and present the proposed
+path/title, scope and relationship to the existing documentation. Prepare enough
+of the proposed structure or content for the user to review, then request
+approval and wait. A general request to implement a feature or update docs does
+not authorize a new page. An explicit user request to create the particular page
+already supplies approval; do not ask again. Continue authorized edits to
+existing pages while approval for a new page is pending.
+
+This rule does not require approval for ordinary in-place edits or temporary
+working notes used to prepare the proposal. Do not turn temporary notes into a
+published page or bypass the rule by placing a new page under `agents/`.
+
 ## Structure and adoption
 
 - `README.md` and `docs/` serve human readers: orientation, current behavior, interfaces, usage, architecture, design rationale, and substantive open design problems. Component READMEs follow the same convention.
@@ -76,10 +103,10 @@ This is a brief scope decision, not a mandatory search of all documentation or
 a checklist to record for each task.
 
 1. For a triggered review, inspect the affected human topic pages and relevant README/navigation entries. Follow relevant links and search for the changed behavior, interface, configuration, or design term. Keep inspection proportional to the affected scope; unrelated documentation need not be read.
-2. Compare those descriptions with the changed source, interfaces, and accepted design intent. Reconcile contradictions and update the canonical explanation in place. Remove obsolete instructions and redundant status paragraphs; do not append a dated correction beneath stale text.
+2. Compare those descriptions with the changed source, interfaces, and accepted design intent. Revise the existing canonical pages holistically: integrate the new material into the relevant sections, reconcile related descriptions, and remove obsolete instructions and redundant paragraphs. Do not append a separate update instead of revising the explanation. Follow the explicit approval rule above if a new page is necessary.
 3. Update related examples and navigation where needed. If the existing docs remain accurate, leave them unchanged after inspection; do not add a “docs reviewed” entry to human documentation.
 4. Refresh agent context only where continuation requires it. Record actionable remaining work, blockers, exact evidence references, and relevant validation results. Remove resolved tasks and replace obsolete state instead of accumulating contradictory handoffs.
-5. Check the final diff for stale claims, broken local links, duplicated explanations, and progress prose leaking into human docs. Report actual validation in the task response or agent context, rather than adding a verification disclaimer to every human page.
+5. Read each affected page as a whole, then check the final diff for stale claims, broken local links, duplicated explanations, disconnected appended updates, unapproved new pages, and progress prose leaking into human docs. Report actual validation in the task response or agent context, rather than adding a verification disclaimer to every human page.
 
 ## Scrub an existing repository
 
