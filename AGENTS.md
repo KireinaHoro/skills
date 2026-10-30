@@ -15,4 +15,7 @@ descriptions. Validate edited skills with the skill-creator validator when avail
 - [documentation-discipline](documentation-discipline/SKILL.md): human documentation and agent context maintenance.
 - [paper-chart](paper-chart/SKILL.md): reproducible publication charts.
 
-Installed skill directories link here from `~/.codex/skills/`.
+Installed skill directories link here from `~/.codex/skills/` (Codex) and
+`~/.claude/skills/` (Claude Code). Keep skill text vendor-neutral; put any
+harness-specific mechanics in separate `references/codex.md` /
+`references/claude.md` files.
